@@ -6,6 +6,7 @@ FROM MyTable ;
 DROP MyTable;
 
 --using inner joins we need to create tables with only lemma, cng, word
+-- To create Wordgraph only create word word nodes
 
 --Nodes 
 DROP TABLE IF EXISTS Node;
@@ -18,7 +19,7 @@ FROM Extracted;
 
 --Graph table
 DROP TABLE IF EXISTS Graph;
-CREATE TABLE Graph( Entity_1 TEXT, Type_1 TEXT, Entity_2 TEXT, Type_2 TEXT, Weight);
+CREATE TABLE Graph( Entity_1 TEXT, Type_1 TEXT, Entity_2 TEXT, Type_2 TEXT, Weight INTEGER);
 
 --Lemma Lemma Edge
 INSERT INTO Graph( Entity_1, Type_1, Entity_2, Type_2, Weight)
