@@ -22,13 +22,28 @@ WHERE t1.Entity_2 = t2.CNG ;
 
 INSERT INTO Graph(Entity_1, Type_1, Entity_2, Type_2, Weight)
 SELECT CNG_Group, 'CNG_Group', Entity_1, Type_1, SUM(Weight)
-FROM TempGraph
+FROM Tempgraph
 GROUP BY CNG_Group, Entity_1;
 
 
 INSERT INTO Graph(Entity_1, Type_1, Entity_2, Type_2, Weight)
 SELECT Entity_1, Type_1, CNG_Group, 'CNG_Group', SUM(Weight)
-FROM TempGraph
+FROM Tempgraph
 GROUP BY CNG_Group, Entity_1;
 
 --CNG_Group to CNG_Group edges are still left
+--We will duplicate the values of CNG_Group in TempGraph to another column in the same table,  so that we can group by 
+
+DROP TABLE IF EXISTS Tempgraph;
+CREATE TABLE Tempgraph(Entity_1 TEXT, Type_1 TEXT, Entity_2 TEXT, Type_2 TEXT, Weight INTEGER, CNG_Group1 TEXT, CNG_Group2 TEXT);
+
+INSERT INTO Tempgraph(Entity_1, Type_1, Entity_2, Type_2, Weight, CNG_Group1, CNG_Group2)
+SELECT t1.Entity_1, t1.Type_1, t1.Entity_2, t1.Type_2, t1.Weight, t2.CNG_Group, t3.CNG_Group
+FROM Graph t1, 'CNG&CNGG' t2, 'CNG&CNGG' t3
+WHERE t1.Entity_1 = t2.CNG AND t1.Entity_2 = t3.CNG;
+
+INSERT INTO Graph(Entity_1, Type_1, Entity_2, Type_2, Weight)
+SELECT CNG_Group1, 'CNG_Group', CNG_Group2, 'CNG_Group', SUM(Weight)
+FROM Tempgraph
+WHERE Type_1 = 'CNG' AND Type_2 = 'CNG'
+GROUP BY CNG_Group1, CNG_Group2;
