@@ -12,18 +12,6 @@ The above link contains the files which we will use
 
 Download:
 
-This repository contains the code used for my project in Natural Language Processing in Sanskrit.
-
-Aim: We are trying to create vector representation for sanskrit words using concept of Graphs. And further use the vectors for various regression/classification/clustering problems.
-
-Language : Python and Sqlite
-
-https://zenodo.org/record/803508
-
-The above link contains the files which we will use
-
-Download:
-
 - DCS\_pick.zip : Contains 442383 files, but there are around 2000         missing files
 - pickleReader.py: Contains code to read pickles
 - DCS\_999.p : it is an example pickle file, can be extracted using pickleReader.py
