@@ -12,6 +12,18 @@ The above link contains the files which we will use
 
 Download:
 
+This repository contains the code used for my project in Natural Language Processing in Sanskrit.
+
+Aim: We are trying to create vector representation for sanskrit words using concept of Graphs. And further use the vectors for various regression/classification/clustering problems.
+
+Language : Python and Sqlite
+
+https://zenodo.org/record/803508
+
+The above link contains the files which we will use
+
+Download:
+
 - DCS\_pick.zip : Contains 442383 files, but there are around 2000         missing files
 - pickleReader.py: Contains code to read pickles
 - DCS\_999.p : it is an example pickle file, can be extracted using pickleReader.py
@@ -100,6 +112,9 @@ We do this in a series of steps as follows:
 - Take a sample of 10,000 pairs of word word edges, while making sure we get a good representative sample
 - this is done by Sampling.ipynb
 - The next step is to sample 1,000 word -&gt;word edges with zero weights and we make sure that the words in these 1,000 samples are from the 10,000 samples we selected before otherwise these samples will be meaningless
+- We do this using the code in Sampling.ipynb &#39;s end
+- In order to calculate bigram probability we need to query the weight of the edge from the database every time which is time consuming, so to speed up computation we same the entire graph in a dictionary.
+- This is done by GraphDictonary.py
 - To calculate Bigram probability/score we have the numerator but we need to denominators, which is count.
 - We find the denominators by using Denominators.ipynb
 - Then we find the score for 11,000 samples in each metapath. Which are our features
@@ -110,4 +125,5 @@ Now from (9+4204+1962802) metapaths we have we select 1 Lakh metapaths as by fin
 Further we reduce the size to 20,000 by finding correlations of each vector of size 11,000 of metapaths with our label i.e. word-&gt;word metapath
 
 Then we use mutual information regression to extract the best metapaths from the 20,000
+
 
