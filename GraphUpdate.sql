@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS Wordgraph;
 CREATE TABLE Wordgraph( Entity_1 TEXT, Type_1 TEXT, Entity_2 TEXT, Type_2 TEXT, Weight);
 
 INSERT INTO Wordgraph( Entity_1, Type_1, Entity_2, Type_2, Weight)
-SELECT e.Word, 'Word', n.Word, 'Word', COUNT(e.Filename)
+SELECT e.Word, 'Word', n.Word, 'Word', COUNT(DISTINCT e.Filename)
 FROM Extracted e, Node n
 WHERE e.Filename = n.Filename AND e.rowid <> n.rowid
 GROUP BY e.Word, n.Word;
